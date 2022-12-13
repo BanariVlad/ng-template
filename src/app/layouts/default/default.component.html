@@ -1,0 +1,7 @@
+<main>
+  <app-navbar></app-navbar>
+  <app-sidebar></app-sidebar>
+  <div class="ml-24 mt-10 mr-5 h-full scrollable relative" [@routeAnimation]="prepareRoute(outlet)">
+    <router-outlet #outlet=outlet></router-outlet>
+  </div>
+</main>

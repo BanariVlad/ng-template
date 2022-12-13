@@ -1,0 +1,20 @@
+
+:root {
+  --radius: 8px;
+  --transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  /* Colors light theme */
+
+  --primary: #6F81F1;
+  --text-color: #29344D;
+  --bg-color: white;
+
+  --white: #fff;
+  --black: #29344D;
+}
+
+/* Colors dark theme */
+
+[data-dark-theme="true"] {
+  --bg-color: black;
+}

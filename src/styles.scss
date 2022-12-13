@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "src/app/config/theme/variables";
+@import "src/app/config/theme/keyframes";
+
+body {
+  color: var(--text-color);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

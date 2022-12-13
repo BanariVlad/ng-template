@@ -1,0 +1,6 @@
+{
+  "/index.php": {
+    "target": "https://google.com/search",
+    "secure": false
+  }
+}

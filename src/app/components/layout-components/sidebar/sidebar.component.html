@@ -1,0 +1,31 @@
+<aside
+  [ngClass]="{ opened: menuState === 'opened' }"
+  class="shadow-2xl rounded-2xl"
+>
+  <div class="menu-item">
+    <div class="menu-item__content disabled-hover">
+      <mat-icon>search</mat-icon>
+      <span [@scale]="menuState">Search</span>
+    </div>
+  </div>
+  <div class="divide-amber-800"></div>
+  <div class="menu-item" *ngFor="let item of menuItems">
+    <div class="menu-item__content" [routerLink]="item.to">
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span [@scale]="menuState" class="menu-item__title">{{
+        item.subtitle || item.title
+      }}</span>
+    </div>
+  </div>
+
+  <button mat-button mat-mini-fab (click)="toggleMenu()" class="toggle-btn">
+    <i
+      class="material-icons pl-1"
+      *ngIf="menuState === 'opened'; else arrowRight"
+      >arrow_back_ios</i
+    >
+    <ng-template #arrowRight>
+      <i class="material-icons"> arrow_forward_ios </i>
+    </ng-template>
+  </button>
+</aside>
