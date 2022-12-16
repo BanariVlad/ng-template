@@ -9,6 +9,8 @@ import { MaterialModule } from '@/shared/modules/material-module.module';
 import { AuthRouterModule } from '@/router/auth-router.module';
 import { ConfirmDirective } from './directives/confirm.directive';
 import { HttpClientModule } from '@angular/common/http';
+import { LayoutComponentsModule } from '@/layout-components/layout-components.module';
+import { StoreModule } from '@/store/store.module';
 
 @NgModule({
   declarations: [AppComponent, ConfirmDirective],
@@ -20,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    LayoutComponentsModule,
+    StoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

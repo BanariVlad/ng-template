@@ -3,8 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "src/app/config/theme/variables";
-@import "src/app/config/theme/keyframes";
+@import "app/sass/theme/variables";
+@import "app/sass/theme/keyframes";
 
 body {
   color: var(--text-color);

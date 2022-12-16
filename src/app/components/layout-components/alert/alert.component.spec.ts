@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AntiplagiatComponent } from './antiplagiat.component';
+import { AlertComponent } from './alert.component';
 
-describe('AntiplagiatComponent', () => {
-  let component: AntiplagiatComponent;
-  let fixture: ComponentFixture<AntiplagiatComponent>;
+describe('AlertComponent', () => {
+  let component: AlertComponent;
+  let fixture: ComponentFixture<AlertComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ AntiplagiatComponent ]
+      declarations: [ AlertComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AntiplagiatComponent);
+    fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

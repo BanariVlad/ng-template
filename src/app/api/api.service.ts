@@ -5,9 +5,5 @@ import { DashboardService } from '@/api/modules/dashboard.service';
   providedIn: 'root',
 })
 export class ApiService {
-  public dashboard;
-
-  constructor(private dashboardApi: DashboardService) {
-    this.dashboard = dashboardApi;
-  }
+  constructor(public readonly dashboard: DashboardService) {}
 }

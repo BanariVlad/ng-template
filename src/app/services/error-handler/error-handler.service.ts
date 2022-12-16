@@ -8,15 +8,18 @@ import { Router } from '@angular/router';
 export class ErrorHandlerService {
   constructor(private router: Router) {}
 
-  public handle(ignoredErrors: Array<number>, error: HttpErrorResponse): void {
-    if (ignoredErrors.includes(error.status)) {
+  public handle(error: HttpErrorResponse, ignoredErrors?: Array<number>): void {
+    if (ignoredErrors?.includes(error.status)) {
       return;
     }
 
     const statusCodes: { [key: number]: Function } = {
-      404: () => this.router.navigateByUrl('/auth/login'),
+      401: () => this.router.navigateByUrl('/auth/login'),
+      404: () => {
+        console.log('test404');
+      },
     };
 
-    statusCodes[error.status]?.() || this.router.navigateByUrl('/auth/login');
+    statusCodes[error.status]?.();
   }
 }

@@ -4,13 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'antiplagiat',
-    loadComponent: () =>
-      import('src/app/pages/antiplagiat/antiplagiat.component').then(
-        (m) => m.AntiplagiatComponent
-      ),
-  },
-  {
     path: 'auth',
     loadComponent: () =>
       import('src/app/layouts/auth/auth.component').then(

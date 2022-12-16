@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class Unsubscribe implements OnDestroy {
-  unsubscribe$ = new Subject<void>();
+  readonly unsubscribe$ = new Subject<void>();
 
   ngOnDestroy() {
     this.unsubscribe$.next();
