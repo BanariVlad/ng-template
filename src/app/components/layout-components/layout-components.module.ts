@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from '@/shared/modules/material-module.module';
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
+import { TrackByPropertyDirective } from '@/directives/track-by-property.directive';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { AlertComponent } from './alert/alert.component';
     NavbarComponent,
     HeaderComponent,
     AlertComponent,
+    TrackByPropertyDirective,
   ],
   imports: [CommonModule, MaterialModule, RouterLink],
   exports: [SidebarComponent, NavbarComponent, HeaderComponent, AlertComponent],

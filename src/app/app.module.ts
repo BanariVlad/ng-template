@@ -27,5 +27,6 @@ import { StoreModule } from '@/store/store.module';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [],
 })
 export class AppModule {}

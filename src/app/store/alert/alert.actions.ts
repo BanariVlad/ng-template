@@ -8,7 +8,7 @@ export interface AlertParams {
 export class ShowAlert {
   static readonly type = '[Alert] ShowAlert';
 
-  constructor(payload: AlertParams) {}
+  constructor(public params: AlertParams) {}
 }
 
 export class HideAlert {

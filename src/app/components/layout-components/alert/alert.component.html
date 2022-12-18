@@ -1,3 +1,21 @@
-<div *ngIf="isShown$ | async" class="app-alert">
-  Alert
-</div>
+<ng-container *ngIf="alerts$ | async as alerts">
+  <div *ngIf="alerts.length" class="relative">
+    <div
+      *ngFor="
+        let alert of alerts.reverse().slice(0, alertsLimit);
+        index as index;
+        key: 'index'
+      "
+      [style.bottom.px]="alertStyles(index).bottom"
+      class="fixed app-alert shadow-xl"
+    >
+      <span>{{ alert.text }}</span>
+      <mat-progress-bar
+        *ngIf="
+          index === alerts.reverse().slice(0, alertsLimit).length - 1 && loading
+        "
+        [value]="loading"
+      ></mat-progress-bar>
+    </div>
+  </div>
+</ng-container>

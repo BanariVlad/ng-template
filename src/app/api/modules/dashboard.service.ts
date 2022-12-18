@@ -12,14 +12,7 @@ export class DashboardService {
   public get(params: any) {
     return this.http.get(this.url, params, {
       alert: true,
+      cache: true,
     });
-  }
-
-  public get1(params: any) {
-    return this.http.get(this.url, params);
-  }
-
-  public get2(params: any) {
-    return this.http.get(this.url, params);
   }
 }

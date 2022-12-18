@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//@ts-ignore
-import sinoni from 'sinoni';
 
 @Component({
   selector: 'app-root',

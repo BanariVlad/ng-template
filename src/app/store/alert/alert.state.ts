@@ -3,13 +3,11 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { AlertParams, HideAlert, ShowAlert } from './alert.actions';
 
 export class AlertStateModel {
-  public isShown: boolean;
-  public params: AlertParams | null;
+  public alerts: Array<AlertParams>;
 }
 
 const defaults = {
-  isShown: false,
-  params: null,
+  alerts: [],
 };
 
 @State<AlertStateModel>({
@@ -19,25 +17,26 @@ const defaults = {
 @Injectable()
 export class AlertState {
   @Selector()
-  static isShown(state: AlertStateModel): boolean {
-    return state.isShown;
-  }
-
-  @Selector()
-  static params(state: AlertStateModel): AlertParams | null {
-    return state.params;
+  static getAlerts(state: AlertStateModel): Array<AlertParams> {
+    return state.alerts;
   }
 
   @Action(ShowAlert)
   showAlert(
-    { patchState }: StateContext<AlertStateModel>,
-    params: AlertParams
+    { patchState, getState }: StateContext<AlertStateModel>,
+    { params }: ShowAlert
   ) {
-    patchState({ isShown: true, params });
+    const state = getState();
+
+    patchState({ alerts: [...state.alerts, params] });
   }
 
   @Action(HideAlert)
-  hideAlert({ patchState }: StateContext<AlertStateModel>) {
-    patchState({ isShown: false, params: null });
+  hideAlert({ patchState, getState }: StateContext<AlertStateModel>) {
+    const { alerts } = getState();
+
+    if (alerts.length) {
+      patchState({ alerts: alerts.slice(1, alerts.length) });
+    }
   }
 }
