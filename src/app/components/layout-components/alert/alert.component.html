@@ -1,19 +1,24 @@
 <ng-container *ngIf="alerts$ | async as alerts">
-  <div *ngIf="alerts.length" class="relative">
+  <div @alertLeave *ngIf="alerts.length" class="relative">
     <div
-      *ngFor="
-        let alert of alerts.reverse().slice(0, alertsLimit);
-        index as index;
-        key: 'index'
-      "
-      [style.bottom.px]="alertStyles(index).bottom"
+      @alertLeave
+      *ngFor="let alert of alerts.reverse(); index as index; key: 'index'"
       class="fixed app-alert shadow-xl"
+      [style.background-color]="settings[alert.type].color"
     >
-      <span>{{ alert.text }}</span>
+      <mat-icon>{{ settings[alert.type].icon }}</mat-icon>
+      <span class="alert-text">{{ alert.text }}</span>
+      <button
+        matTooltip="Skip this notification"
+        class="next-alert"
+        mat-icon-button
+        (click)="skipAlert()"
+      >
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
       <mat-progress-bar
-        *ngIf="
-          index === alerts.reverse().slice(0, alertsLimit).length - 1 && loading
-        "
+        color="primary"
+        *ngIf="index === alerts.reverse().length - 1 && loading"
         [value]="loading"
       ></mat-progress-bar>
     </div>

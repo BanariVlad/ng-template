@@ -1,26 +1,81 @@
 .app-alert {
-  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  gap: 20px;
   background: white;
-  width: 200px;
+  color: white;
+  width: 320px;
   height: 80px;
   margin-right: 10px;
+  border-radius: var(--radius);
+  padding: 8px;
   right: 20px;
+  bottom: 76px;
   transition: all 0.3s;
+  transform: scale(0.8);
+  overflow: hidden;
+
+  .alert-text {
+    max-width: 210px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  .next-alert {
+    position: absolute;
+    right: 10px;
+    //bottom: 25px;
+
+    mat-icon {
+      font-size: 22px;
+      height: 22px;
+      width: 22px;
+    }
+  }
+}
+
+mat-icon {
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
 }
 
 .app-alert:last-child {
   transform: scale(1);
+  bottom: 100px;
 }
 
 .app-alert:nth-last-child(2) {
   transform: scale(0.9);
+  bottom: 88px;
 }
 
 .app-alert:nth-last-child(3) {
   transform: scale(0.8);
 }
 
+::ng-deep .mat-progress-bar-fill::after {
+  background: white;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: transparent;
+}
+
+::ng-deep .mat-progress-bar-background {
+  fill: transparent;
+}
+
 mat-progress-bar {
   position: absolute;
+  left: 0;
   bottom: 0;
+  margin: 0 auto;
+  border-radius: 0 0 var(--radius);
+  opacity: 0.4;
+  height: 7px;
 }

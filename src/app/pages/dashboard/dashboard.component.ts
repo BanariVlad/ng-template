@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { listTransition } from '@/transitions';
 import { ApiService } from '@/api/api.service';
 import { Unsubscribe } from '@/shared/classes/unsubscribe';
-import { repeat, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +28,7 @@ export class DashboardComponent extends Unsubscribe implements OnInit {
 
     this.api.dashboard
       .get({ postId: 1 })
-      .pipe(takeUntil(this.unsubscribe$), repeat(3))
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe((response: any) => {
         console.log(response);
       });

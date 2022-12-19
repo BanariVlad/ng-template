@@ -46,7 +46,9 @@ export class HttpService {
     if (alert && typeof alert === 'object') {
       this.store.dispatch(new ShowAlert(alert));
     } else if (alert) {
-      this.store.dispatch(new ShowAlert({ type: 'Success', text: 'Success' }));
+      this.store.dispatch(
+        new ShowAlert({ type: 'Success', text: 'Successful operation!' })
+      );
     }
   }
 
