@@ -6,7 +6,7 @@
 
   --primary: #6f81f1;
   --text-color: #29344d;
-  --bg-color: white;
+  --background: white;
 
   --white: #fff;
   --black: #29344d;
@@ -19,6 +19,7 @@
 
 /* Colors dark theme */
 
-[data-dark-theme="true"] {
-  --bg-color: black;
+.theme-dark {
+  --background: #2d2f35;
+  --text-color: white;
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -6,17 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
+  private readonly isDark: string | null = localStorage.getItem('isDark');
 
-  ngOnInit(): void {}
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  changeTheme() {
-    const isDark = localStorage.getItem('isDark')
-      ? JSON.parse(localStorage.getItem('isDark') as string)
-      : false;
+  ngOnInit(): void {
+    if (this.isDark && JSON.parse(this.isDark)) {
+      this.document.body.classList.toggle('theme-dark');
+    }
+  }
 
-    document.documentElement.setAttribute('data-dark-theme', String(!isDark));
+  switchTheme() {
+    this.document.body.classList.toggle('theme-dark');
 
-    localStorage.setItem('isDark', String(!isDark));
+    localStorage.setItem('isDark', String(!JSON.parse(this.isDark ?? 'false')));
   }
 }

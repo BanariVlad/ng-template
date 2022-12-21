@@ -13,13 +13,13 @@ import {
 import { AlertParams, HideAlert } from '@/store/alert/alert.actions';
 import { Select, Store } from '@ngxs/store';
 import { Unsubscribe } from '@/shared/classes/unsubscribe';
-import { alertTransition } from '@/transitions';
+import { alertEnterTransition, alertLeaveTransition } from '@/transitions';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
-  animations: [alertTransition],
+  animations: [alertLeaveTransition, alertEnterTransition],
 })
 export class AlertComponent extends Unsubscribe implements OnInit {
   readonly alertsLimit = 3;
@@ -55,8 +55,8 @@ export class AlertComponent extends Unsubscribe implements OnInit {
     //Changing this value be sure debounce is right configured for multiple alerts
     const delayMs = 4000;
 
-    this.alerts$.pipe(debounceTime(50)).subscribe(() => {
-      if (!this.loading) {
+    this.alerts$.pipe(debounceTime(50)).subscribe((alerts) => {
+      if (!this.loading && alerts.length) {
         this.startLoading(delayMs);
       }
     });
@@ -82,6 +82,7 @@ export class AlertComponent extends Unsubscribe implements OnInit {
   }
 
   skipAlert() {
+    this.loading = 0;
     this.interval.unsubscribe();
   }
 }

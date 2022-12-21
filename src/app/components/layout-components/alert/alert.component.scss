@@ -1,3 +1,9 @@
+:host {
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}
+
 .app-alert {
   display: flex;
   align-items: center;

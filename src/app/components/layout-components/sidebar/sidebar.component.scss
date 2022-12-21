@@ -3,7 +3,7 @@ aside {
   position: absolute;
   width: 70px;
   height: calc(100vh - (60px + 1rem));
-  background: white;
+  background: var(--background);
   transition: all 0.5s var(--transition);
   z-index: 999999999;
 }
@@ -89,4 +89,3 @@ aside:not(.opened) {
     font-size: 14px;
   }
 }
-
