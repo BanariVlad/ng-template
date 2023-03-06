@@ -12,14 +12,22 @@ export class NavbarComponent implements OnInit {
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
-    if (this.isDark && JSON.parse(this.isDark)) {
-      this.document.body.classList.toggle('theme-dark');
+    if (this.isDark && this.isDark !== 'undefined' && JSON.parse(this.isDark)) {
+      this.document.body.classList.add('theme-dark');
     }
   }
 
   switchTheme() {
-    this.document.body.classList.toggle('theme-dark');
+    try {
+      this.document.body.classList.toggle('theme-dark');
 
-    localStorage.setItem('isDark', String(!JSON.parse(this.isDark ?? 'false')));
+      localStorage.setItem(
+        'isDark',
+        String(!JSON.parse(this.isDark as string))
+      );
+    } catch (e) {
+      //set dark theme in case it's somehow undefined in localStorage
+      localStorage.setItem('isDark', 'true');
+    }
   }
 }

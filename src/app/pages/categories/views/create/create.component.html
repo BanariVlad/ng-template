@@ -1,0 +1,36 @@
+<div class="form-header">
+  <h2>Create category form</h2>
+  <div>
+    <button mat-stroked-button (click)="submit()">Save</button>
+  </div>
+</div>
+
+<form [formGroup]="form" class="grid grid-cols-2">
+  <div class="example-container">
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input formControlName="name" matInput required />
+    </mat-form-field>
+  </div>
+
+  <div class="example-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Surname</mat-label>
+      <input formControlName="surname" matInput required />
+    </mat-form-field>
+  </div>
+
+  <div class="example-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input formControlName="email" matInput required />
+    </mat-form-field>
+  </div>
+
+  <div class="example-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm your email</mat-label>
+      <input formControlName="email_confirm" matInput required />
+    </mat-form-field>
+  </div>
+</form>

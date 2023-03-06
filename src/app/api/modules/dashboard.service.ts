@@ -12,7 +12,8 @@ export class DashboardService {
   public get(params: any) {
     return this.http.get(this.url, params, {
       alert: true,
-      cache: true,
+      // cache: true,
+      // saveInStore: true,
     });
   }
 }

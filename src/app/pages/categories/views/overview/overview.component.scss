@@ -1,0 +1,9 @@
+.mat-table {
+  width: 100%;
+  background: var(--background);
+
+  td,
+  th {
+    color: var(--text-color);
+  }
+}

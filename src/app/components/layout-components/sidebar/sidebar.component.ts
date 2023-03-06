@@ -41,4 +41,8 @@ export class SidebarComponent implements OnInit {
   toggleMenu() {
     this.menuState = this.menuState === 'closed' ? 'opened' : 'closed';
   }
+
+  closeMenu() {
+    this.menuState = 'closed';
+  }
 }

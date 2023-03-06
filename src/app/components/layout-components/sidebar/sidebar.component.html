@@ -10,7 +10,11 @@
   </div>
   <div class="divide-amber-800"></div>
   <div class="menu-item" *ngFor="let item of menuItems">
-    <div class="menu-item__content" [routerLink]="item.to">
+    <div
+      class="menu-item__content"
+      [routerLink]="item.to"
+      (click)="closeMenu()"
+    >
       <mat-icon>{{ item.icon }}</mat-icon>
       <span [@scale]="menuState" class="menu-item__title">{{
         item.subtitle || item.title
