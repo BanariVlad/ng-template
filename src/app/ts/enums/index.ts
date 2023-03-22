@@ -1,1 +1,1 @@
-export { PageRoutes, ErrorRoutes } from '@/ts/enums/routes';
+export { ApiRoutes, ErrorRoutes, PageRoutes } from '@/ts/enums/routes';

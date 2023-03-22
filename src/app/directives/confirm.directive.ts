@@ -1,10 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[appConfirm]'
+  selector: '[appConfirm]',
 })
 export class ConfirmDirective {
-
-  constructor() { }
-
+  constructor() {}
 }

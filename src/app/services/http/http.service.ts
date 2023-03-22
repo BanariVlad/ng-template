@@ -1,6 +1,10 @@
-import { Injectable } from '@angular/core';
+import { ErrorHandlerService } from '@/services/error-handler/error-handler.service';
+import { AlertParams, ShowAlert } from '@/store/alert/alert.actions';
+import { Config, HttpConfig, HttpConfigWithStore } from '@/ts/interfaces';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 import {
   BehaviorSubject,
   catchError,
@@ -9,11 +13,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { ErrorHandlerService } from '@/services/error-handler/error-handler.service';
-import { Router } from '@angular/router';
-import { Store } from '@ngxs/store';
-import { AlertParams, ShowAlert } from '@/store/alert/alert.actions';
-import { Config, HttpConfig, HttpConfigWithStore } from '@/ts/interfaces';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +52,7 @@ export class HttpService {
     }
   }
 
-  private cacheData(config: Config | undefined, key: string, response: Object) {
+  private cacheData(config: Config | undefined, key: string, response: any) {
     if (config?.cache && !this.cachedResponses[key]) {
       this.cachedResponses[key] = response;
       return;
@@ -92,25 +92,43 @@ export class HttpService {
     }
   }
 
-  public get(url: string, params?: any, config?: Config): Observable<any> {
+  public get<T>(url: string, params?: any, config?: Config): Observable<T> {
+    const checkForCachedResponse = <T>(
+      config: Config,
+      url: string
+    ): T | null => {
+      if (config.cache && this.cachedResponses[url]) {
+        return this.cachedResponses[url];
+      }
+
+      if (config.saveInStore) {
+        return this.getFromStore(config);
+      }
+
+      return null;
+    };
+
     if (config?.cache || config?.saveInStore) {
-      const response = this.checkForCachedResponse(config, url);
+      const response: T | null = checkForCachedResponse(config, url);
 
       if (response) {
-        return new BehaviorSubject(response);
+        return new BehaviorSubject<T>(response);
       }
     }
 
+    const apiUrl = config?.ignorePrefix
+      ? environment.apiUrl.replace('/api/v1', '')
+      : environment.apiUrl;
+
     return this.http
-      .get(`${environment.apiUrl}/${url}`, {
+      .get<T>(`${apiUrl}${url}`, {
         params,
-        headers: config?.headers || {},
       })
       .pipe(
         tap(() => {
           this.showAlert(config?.alert);
         }),
-        map((response) => {
+        map((response: T) => {
           this.cacheData(config, url, response);
 
           return response;
@@ -121,12 +139,12 @@ export class HttpService {
       );
   }
 
-  public post(
+  public post<T>(
     url: string,
     payload?: any,
     config?: HttpConfig
-  ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${url}`, payload).pipe(
+  ): Observable<T> {
+    return this.http.post<T>(`${environment.apiUrl}${url}`, payload).pipe(
       tap(() => {
         this.showAlert(config?.alert);
       }),
@@ -136,8 +154,12 @@ export class HttpService {
     );
   }
 
-  public put(url: string, payload?: any, config?: HttpConfig): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${url}`, payload).pipe(
+  public put<T>(
+    url: string,
+    payload?: any,
+    config?: HttpConfig
+  ): Observable<T> {
+    return this.http.put<T>(`${environment.apiUrl}${url}`, payload).pipe(
       tap(() => {
         this.showAlert(config?.alert);
       }),
@@ -147,12 +169,12 @@ export class HttpService {
     );
   }
 
-  public patch(
+  public patch<T>(
     url: string,
     payload?: any,
     config?: HttpConfig
-  ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${url}`, payload).pipe(
+  ): Observable<T> {
+    return this.http.post<T>(`${environment.apiUrl}${url}`, payload).pipe(
       tap(() => {
         this.showAlert(config?.alert);
       }),
@@ -162,12 +184,8 @@ export class HttpService {
     );
   }
 
-  public delete(
-    url: string,
-    payload?: any,
-    config?: HttpConfig
-  ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/${url}`, payload).pipe(
+  public delete<T>(url: string, config?: HttpConfig): Observable<T> {
+    return this.http.delete<T>(`${environment.apiUrl}${url}`).pipe(
       tap(() => {
         this.showAlert(config?.alert);
       }),

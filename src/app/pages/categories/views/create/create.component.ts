@@ -1,25 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { ApiService } from '@/api/api.service';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
 })
-export class CreateComponent implements OnInit {
-  form: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.min(3)]],
-    surname: ['', [Validators.required, Validators.min(3)]],
-    email: ['', [Validators.required, Validators.email]],
-    email_confirm: ['', [Validators.required, Validators.email]],
-  });
-  constructor(protected fb: FormBuilder) {}
+export class CreateComponent {
+  form: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(
+    protected fb: FormBuilder,
+    protected api: ApiService,
+    protected router: Router
+  ) {
+    this.form = this.fb.group({
+      name: ['', [Validators.required, Validators.min(3)]],
+      username: ['', [Validators.required, Validators.min(3)]],
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
 
   submit() {
     this.form.markAllAsTouched();
 
-    console.log(this.form);
+    if (this.form.valid) {
+      this.api.users.createUser(this.form.value).subscribe(() => {
+        this.router.navigate(['/categories']);
+      });
+    }
   }
 }

@@ -1,8 +1,8 @@
-export { MenuItem } from './menu-item';
-export { UserInterface } from './user';
 export {
   Config,
   HttpConfig,
-  HttpConfigWithStore,
   HttpConfigWithCache,
+  HttpConfigWithStore,
 } from './http';
+export { MenuItem } from './menu-item';
+export { User } from './user';

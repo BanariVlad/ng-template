@@ -9,6 +9,7 @@ export interface HttpConfig {
   alert?: boolean | AlertParams;
   ignoredErrors?: Array<number>;
   headers?: any;
+  ignorePrefix?: boolean;
 }
 
 /**
