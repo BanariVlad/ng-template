@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from '@/ts/interfaces';
-import { PageRoutes } from '@/ts/enums';
 import { sidebarTransition } from '@/transitions';
+import { PageRoutes } from '@/ts/enums';
+import { MenuItem } from '@/ts/interfaces';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,9 +28,9 @@ export class SidebarComponent implements OnInit {
       to: PageRoutes.Tools,
     },
     {
-      title: 'Help',
-      icon: 'info',
-      to: PageRoutes.Help,
+      title: 'Game (AI)',
+      icon: 'gamepad',
+      to: PageRoutes.TicTacToe,
     },
   ];
 

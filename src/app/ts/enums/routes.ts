@@ -2,7 +2,7 @@ export enum PageRoutes {
   Dashboard = '/dashboard',
   Categories = '/categories',
   Tools = '/tools',
-  Help = '/help',
+  TicTacToe = '/tic-tac-toe',
 }
 
 export enum ErrorRoutes {

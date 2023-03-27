@@ -1,1 +1,68 @@
-<p>login works!</p>
+<div class="flex mx-5 my-5">
+  <div>
+    <ng-container [ngTemplateOutlet]="bubbles"></ng-container>
+  </div>
+  <div class="absolute bottom-4 right-4 rotate-180">
+    <ng-container [ngTemplateOutlet]="bubbles"></ng-container>
+  </div>
+  <div class="absolute" style="bottom: -150px; left: -150px">
+    <ng-container [ngTemplateOutlet]="bigBubble"></ng-container>
+  </div>
+  <div class="absolute" style="top: -150px; right: -150px">
+    <ng-container [ngTemplateOutlet]="bigBubble"></ng-container>
+  </div>
+  <div class="absolute" style="top: -300px; right: 100px">
+    <ng-container [ngTemplateOutlet]="bigBubble"></ng-container>
+  </div>
+</div>
+
+<ng-template #bigBubble>
+  <div class="rounded-full bg-red-500 h-96 w-96"></div>
+</ng-template>
+
+<ng-template #bubbles>
+  <div class="rounded-full bg-red-500 w-32 h-32"></div>
+  <div class="rounded-full bg-red-500 w-14 h-14 absolute top-44 left-44"></div>
+</ng-template>
+
+<div class="w-full h-full flex justify-center">
+  <div class="w-[500px]">
+    <h2 class="text-5xl text-center">Welcome Back!</h2>
+    <h3 class="text-center text-2xl text-gray-400 mt-4">Login to continue</h3>
+    <form [formGroup]="form" (submit)="submit()">
+      <div class="flex mt-10">
+        <input
+          formControlName="username"
+          class="rounded-none border-none rounded-l-lg bg-red-100 border block flex-1 min-w-0 w-full h-12 px-2 text-sm"
+          placeholder="Username"
+          type="text"
+        />
+        <span
+          class="inline-flex items-center px-3 text-sm text-white bg-red-500 rounded-r-md border border-r-0"
+        >
+          <i class="material-icons">person</i>
+        </span>
+      </div>
+      <div class="flex mt-5">
+        <input
+          formControlName="password"
+          class="rounded-none border-none rounded-l-lg bg-red-100 border block flex-1 min-w-0 w-full h-12 px-2 text-sm"
+          placeholder="Password"
+          type="password"
+        />
+        <span
+          class="inline-flex items-center px-3 text-sm text-white bg-red-500 rounded-r-md border border-r-0"
+        >
+          <i class="material-icons">key</i>
+        </span>
+      </div>
+      <div class="flex justify-center mt-5">
+        <button
+          class="w-full bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+        >
+          Log In
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

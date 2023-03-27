@@ -25,6 +25,7 @@
     "@ngxs/store": "^3.7.6",
     "prettier": "^2.7.1",
     "rxjs": "~7.5.0",
+    "tic-tac-toe-minimax": "^1.0.8",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@/guards/auth.guard';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -37,11 +37,9 @@ const routes: Routes = [
           import('src/app/pages/tools/tools.module').then((m) => m.ToolsModule),
       },
       {
-        path: 'help',
-        loadComponent: () =>
-          import('src/app/pages/help-center/help-center.component').then(
-            (m) => m.HelpCenterComponent
-          ),
+        path: 'tic-tac-toe',
+        loadChildren: () =>
+          import('src/app/pages/games/games.module').then((m) => m.GamesModule),
       },
       //indexing items for animation
     ].map((item: any, index: number) => ({
