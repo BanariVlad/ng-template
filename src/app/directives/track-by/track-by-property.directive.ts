@@ -5,13 +5,11 @@ import { NgForOf } from '@angular/common';
   selector: '[ngForKey]',
 })
 export class TrackByPropertyDirective {
-  private property: string = '';
+  private property = '';
 
   public constructor(@Host() private readonly ngFor: NgForOf<any>) {
     this.ngFor.ngForTrackBy = (index: number, item: any) =>
-      this.property && typeof item === 'object' && this.property in item
-        ? item[this.property]
-        : index;
+      this.property && typeof item === 'object' && this.property in item ? item[this.property] : index;
   }
 
   @Input('ngForKey')

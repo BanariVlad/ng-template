@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HeaderComponent } from './header/header.component';
+import { TrackByModule } from '@/directives/track-by/track-by.module';
 import { MaterialModule } from '@/shared/modules/material-module.module';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from './alert/alert.component';
-import { TrackByPropertyDirective } from '@/directives/track-by-property.directive';
+import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -14,9 +14,8 @@ import { TrackByPropertyDirective } from '@/directives/track-by-property.directi
     NavbarComponent,
     HeaderComponent,
     AlertComponent,
-    TrackByPropertyDirective,
   ],
-  imports: [CommonModule, MaterialModule, RouterLink],
+  imports: [CommonModule, MaterialModule, RouterLink, TrackByModule],
   exports: [SidebarComponent, NavbarComponent, HeaderComponent, AlertComponent],
 })
 export class LayoutComponentsModule {}

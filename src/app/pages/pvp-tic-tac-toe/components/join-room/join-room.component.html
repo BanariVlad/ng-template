@@ -1,0 +1,28 @@
+<div class="h-full w-full flex items-center justify-center">
+  <mat-card>
+    <div class="flex !flex-col gap-10">
+      <div class="flex flex-col gap-3">
+        <mat-form-field class="example-full-width">
+          <mat-label>Room Id</mat-label>
+          <input matInput placeholder="Ex. 123456" [(ngModel)]="roomId" />
+        </mat-form-field>
+        <button
+          class="w-[300px] !h-[60px]"
+          mat-flat-button
+          color="primary"
+          (click)="joinRoom()"
+        >
+          Join Room
+        </button>
+      </div>
+      <button
+        class="w-[300px] !h-[60px]"
+        mat-flat-button
+        color="warn"
+        (click)="hostGame()"
+      >
+        Host Game
+      </button>
+    </div>
+  </mat-card>
+</div>

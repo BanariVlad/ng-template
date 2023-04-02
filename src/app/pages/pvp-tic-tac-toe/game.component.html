@@ -1,0 +1,20 @@
+<mat-card>
+  <h2>Your wins: {{ game.wins$ | async }}</h2>
+  <mat-card-content>
+    <div [ngClass]="{ 'tic-tac-toe': true, playing: playing }">
+      <button
+        class="game-field"
+        *ngFor="let field of game.board$ | async; let i = index"
+        [ngClass]="{ help: helpIndex === i }"
+        (click)="makeMove(i)"
+        [disabled]="!game.move$.getValue || game.move$.getValue() !== mySymbol"
+      >
+        {{ field === "X" || field === "O" ? field : "" }}
+      </button>
+    </div>
+  </mat-card-content>
+
+  <button mat-stroked-button (click)="game.resetBoard()">Reset</button>
+</mat-card>
+
+<app-chat> </app-chat>

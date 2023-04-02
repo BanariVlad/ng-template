@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 //@ts-ignore
 import Minimax from 'tic-tac-toe-minimax';
+
 const { GameStep } = Minimax;
 
 type Difficulty = 'Easy' | 'Normal' | 'Hard';
 
 @Component({
-  selector: 'app-games',
+  selector: 'app-ai-tic-tac-toe',
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.scss'],
 })

@@ -1,5 +1,6 @@
+import { PageRoutes } from '@/ts/enums';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,6 +8,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+declare var google: any;
 
 @Component({
   selector: 'app-login',
@@ -17,7 +22,8 @@ import {
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  constructor() {
+
+  constructor(private router: Router, private ngZone: NgZone) {
     this.form = new FormGroup({
       username: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.min(8)]),
@@ -35,5 +41,24 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    google.accounts.id.initialize({
+      client_id: environment.googleLoginKey,
+      callback: this.handleCredentialResponse.bind(this),
+    });
+    google.accounts.id.renderButton(
+      document.getElementById('buttonDiv'),
+      { theme: 'outline', size: 'large' } // customization attributes
+    );
+    google.accounts.id.prompt(); // also display the One Tap dialog
+  }
+
+  handleCredentialResponse(response: any) {
+    localStorage.setItem('credentials', JSON.stringify(response.credential));
+    console.log(response);
+
+    this.ngZone.run(() => {
+      this.router.navigate([PageRoutes.TicTacToeMultiplayer]);
+    });
+  }
 }

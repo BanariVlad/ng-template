@@ -32,6 +32,11 @@ export class SidebarComponent implements OnInit {
       icon: 'gamepad',
       to: PageRoutes.TicTacToe,
     },
+    {
+      title: 'Game (PVP)',
+      icon: 'gamepad',
+      to: PageRoutes.TicTacToeMultiplayer,
+    },
   ];
 
   constructor() {}

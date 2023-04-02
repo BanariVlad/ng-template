@@ -6,6 +6,9 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080',
   // apiUrl: 'https://jsonplaceholder.typicode.com',
+  socketUrl: 'http://localhost:3000',
+  googleLoginKey:
+    '1091753753057-mc1kensok5n8u09tk4s6bgsrcjlqf327.apps.googleusercontent.com',
 };
 
 /*

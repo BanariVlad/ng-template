@@ -1,8 +1,10 @@
 export enum PageRoutes {
+  Auth = '/auth',
   Dashboard = '/dashboard',
   Categories = '/categories',
   Tools = '/tools',
   TicTacToe = '/tic-tac-toe',
+  TicTacToeMultiplayer = '/pvp-tic-tac-toe',
 }
 
 export enum ErrorRoutes {

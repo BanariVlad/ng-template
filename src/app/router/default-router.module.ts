@@ -10,7 +10,6 @@ const routes: Routes = [
       import('src/app/layouts/default/default.component').then(
         (m) => m.DefaultComponent
       ),
-    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
@@ -39,7 +38,17 @@ const routes: Routes = [
       {
         path: 'tic-tac-toe',
         loadChildren: () =>
-          import('src/app/pages/games/games.module').then((m) => m.GamesModule),
+          import('src/app/pages/ai-tic-tac-toe/games.module').then(
+            (m) => m.GamesModule
+          ),
+      },
+      {
+        path: 'pvp-tic-tac-toe',
+        canActivateChild: [AuthGuard],
+        loadChildren: () =>
+          import('src/app/pages/pvp-tic-tac-toe/pvp-tic-tac-toe.module').then(
+            (m) => m.PvpTicTacToeModule
+          ),
       },
       //indexing items for animation
     ].map((item: any, index: number) => ({

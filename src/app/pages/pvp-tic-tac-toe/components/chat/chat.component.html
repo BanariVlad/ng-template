@@ -1,0 +1,95 @@
+<aside class="absolute top-0 h-full max-lg:pt-[77px]">
+  <div
+    class="absolute left-[calc(100%+10px)] top-2 w-8 h-8 max-lg:top-[84px]"
+    [ngClass]="{
+      'opacity-0': chatOpen,
+      'pointers-events-none': chatOpen,
+      'duration-300': animateChat
+    }"
+  ></div>
+  <div class="h-full overflow-hidden" [@.disabled]="!animateChat">
+    <div class="h-full flex flex-col w-80 min-[1920px]:w-[16.6vw]">
+      <div class="flex-auto bg-main-base px-5 pt-4 pb-5 flex flex-col z-10">
+        <div
+          class="flex justify-between items-center border-b border-blue-light pb-4"
+        >
+          <div class="flex items-center">
+            <span class="text-highlight text-sm font-bold capitalize"
+              >chat</span
+            >
+          </div>
+        </div>
+        <div class="relative flex-auto my-5">
+          <div
+            class="overflow-y-auto overflow-x-hidden max-h-[calc(100vh-360px)] pb-0"
+          >
+            <div #chatScrollable>
+              <ng-container
+                *ngFor="
+                  let message of messages$ | async;
+                  let index = index;
+                  key: 'index'
+                "
+              >
+                <div
+                  class="flex items-start mb-4"
+                  @sending
+                  [@.disabled]="!animateMessage"
+                >
+                  <div
+                    class="basis-10 shrink-0 h-10 rounded-full mr-4 overflow-hidden"
+                  >
+                    <img
+                      class="w-full h-full object-contain"
+                      [src]="'https://fakeimg.pl/300/'"
+                      alt="avatar"
+                    />
+                  </div>
+                  <div>
+                    <div class="font-bold mb-2">
+                      {{ message.userName }}
+                    </div>
+                    <div
+                      class="bg-main-light py-1 px-1.5 text-highlight text-sm rounded-b-xl rounded-r-xl"
+                    >
+                      {{ message.text }}
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <ng-container *ngIf="thereIsNewMessages">
+            <div
+              class="absolute left-1/2 translate-x-[-50%] bottom-0 rounded-[50px] bg-blue-base flex justify-between items-center px-4 py-2 w-[180px] cursor-pointer"
+              (click)="scrollDown(true)"
+            >
+              <span class="font-medium text-xs text-highlight"
+                >See {{ "15+" }} new messages</span
+              >
+              <img
+                class="w-2.5 h-2.5 object-contain"
+                src="assets/images/icons/arrow-down.svg"
+                alt="arrow down"
+              />
+            </div>
+          </ng-container>
+        </div>
+        <div class="relative">
+          <mat-form-field
+            class="chat text-highlight text-sm font-medium w-full"
+            appearance="outline"
+          >
+            <input
+              matInput
+              type="text"
+              [formControl]="chatInput"
+              placeholder="Message #english"
+              (keydown.enter)="onKeyDown()"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
