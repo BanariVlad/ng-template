@@ -50,6 +50,12 @@ const routes: Routes = [
             (m) => m.PvpTicTacToeModule
           ),
       },
+      {
+        path: 'todo',
+        canActivateChild: [AuthGuard],
+        loadChildren: () =>
+          import('src/app/pages/todo/todo.module').then((m) => m.TodoModule),
+      },
       //indexing items for animation
     ].map((item: any, index: number) => ({
       ...item,

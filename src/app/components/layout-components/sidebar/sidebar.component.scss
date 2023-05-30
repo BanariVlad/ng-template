@@ -5,7 +5,7 @@ aside {
   height: calc(100vh - (60px + 1rem));
   background: var(--background);
   transition: all 0.5s var(--transition);
-  z-index: 999999999;
+  z-index: 99;
 }
 
 aside.opened {

@@ -1,0 +1,70 @@
+<section class="px-5">
+  <button mat-raised-button color="primary" (click)="openCreateDialog()">
+    Create new
+  </button>
+
+  <div cdkDropListGroup class="flex justify-between mt-5">
+    <div class="example-container">
+      <h2>To do</h2>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="todoService.todo$ | async"
+        class="example-list"
+        id="todo"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box"
+          *ngFor="let item of todoService.todo$ | async"
+          cdkDrag
+          [cdkDragData]="item"
+        >
+          {{ item.title }}
+        </div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2>Check Later</h2>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="todoService.check$ | async"
+        class="example-list"
+        id="check"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box"
+          *ngFor="let item of todoService.check$ | async"
+          cdkDrag
+          [cdkDragData]="item"
+        >
+          {{ item.title }}
+        </div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2>Done</h2>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="todoService.done$ | async"
+        class="example-list"
+        id="done"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="example-box"
+          *ngFor="let item of todoService.done$ | async"
+          cdkDrag
+          [cdkDragData]="item"
+        >
+          {{ item.title }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,6 +5,7 @@ export enum PageRoutes {
   Tools = '/tools',
   TicTacToe = '/tic-tac-toe',
   TicTacToeMultiplayer = '/pvp-tic-tac-toe',
+  Todo = '/todo',
 }
 
 export enum ErrorRoutes {
@@ -15,4 +16,5 @@ export enum ErrorRoutes {
 export enum ApiRoutes {
   Users = '/users',
   User = '/user',
+  Todos = '/todo',
 }
