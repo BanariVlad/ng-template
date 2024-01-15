@@ -1,3 +1,4 @@
+import { ApiService } from '@/api/api.service';
 import { PageRoutes } from '@/ts/enums';
 import { CommonModule } from '@angular/common';
 import { Component, NgZone, OnInit } from '@angular/core';
@@ -23,9 +24,13 @@ declare var google: any;
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private router: Router, private ngZone: NgZone) {
+  constructor(
+    private router: Router,
+    private ngZone: NgZone,
+    private api: ApiService
+  ) {
     this.form = new FormGroup({
-      username: new FormControl(null, [Validators.required, Validators.email]),
+      username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.min(8)]),
     });
   }
@@ -34,10 +39,11 @@ export class LoginComponent implements OnInit {
     this.form.markAsTouched();
 
     if (this.form.valid) {
-      // this.config.logIn(this.form.value).subscribe(async (_) => {
-      //   this.config.getUser().subscribe();
-      //   await this.router.navigateByUrl('/dashboard');
-      // });
+      this.api.auth.login(this.form.value).subscribe((res) => {
+        localStorage.setItem('credentials', res.username);
+
+        this.router.navigate([PageRoutes.Categories]);
+      });
     }
   }
 
@@ -55,7 +61,6 @@ export class LoginComponent implements OnInit {
 
   handleCredentialResponse(response: any) {
     localStorage.setItem('credentials', JSON.stringify(response.credential));
-    console.log(response);
 
     this.ngZone.run(() => {
       this.router.navigate([PageRoutes.TicTacToeMultiplayer]);

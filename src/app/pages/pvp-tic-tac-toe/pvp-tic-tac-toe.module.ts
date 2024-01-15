@@ -1,4 +1,5 @@
 import { TrackByModule } from '@/directives/track-by/track-by.module';
+import { AuthGuard } from '@/guards/auth.guard';
 import { GameComponent } from '@/pages/pvp-tic-tac-toe/game.component';
 import { MaterialModule } from '@/shared/modules/material-module.module';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,7 @@ const routes: Route[] = [
   {
     path: ':id/:symbol',
     component: GameComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

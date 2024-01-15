@@ -62,33 +62,13 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     },
     {
       userName: 'POP2DR',
-      text: 'dev fix this pls dev fix this pls',
+      text: 'Some random text',
       // image: 'assets/images/user-2.png',
     },
     {
       userName: 'Madness',
-      text: 'hello fellas. please tip me',
+      text: 'Lorem ipsum dolor sit amet c',
       // image: 'assets/images/user-1.png',
-    },
-    {
-      userName: 'POP2DR',
-      text: 'dev fix this pls',
-      // image: 'assets/images/user-2.png',
-    },
-    {
-      userName: 'POP2DR',
-      text: 'dev fix this pls',
-      // image: 'assets/images/user-2.png',
-    },
-    {
-      userName: 'POP2DR',
-      text: 'dev fix this pls dev fix this pls dev fix this pls dev fix this pls dev fix this pls dev fix this pls dev fix this pls dev fix this pls',
-      // image: 'assets/images/user-2.png',
-    },
-    {
-      userName: 'POP2DR',
-      text: 'dev fix this pls',
-      // image: 'assets/images/user-2.png',
     },
   ]);
 
@@ -163,7 +143,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     if (text) {
       const newMessage: Message = {
         text,
-        userName: 'Test123',
+        userName: localStorage.getItem('credentials') as string,
         // image: 'assets/images/user-1.png',
       };
 

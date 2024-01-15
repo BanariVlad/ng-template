@@ -6,11 +6,12 @@ import { AuthRouterModule } from '@/router/auth-router.module';
 import { DefaultRouterModule } from '@/router/default-router.module';
 import { MaterialModule } from '@/shared/modules/material-module.module';
 import { StoreModule } from '@/store/store.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterOutlet } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ConfirmDirective } from './directives/confirm.directive';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ConfirmDirective],
@@ -25,7 +26,13 @@ import { ConfirmDirective } from './directives/confirm.directive';
     LayoutComponentsModule,
     StoreModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
   exports: [],
 })

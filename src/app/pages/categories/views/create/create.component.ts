@@ -20,6 +20,7 @@ export class CreateComponent {
       name: ['', [Validators.required, Validators.min(3)]],
       username: ['', [Validators.required, Validators.min(3)]],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.min(6)]],
     });
   }
 

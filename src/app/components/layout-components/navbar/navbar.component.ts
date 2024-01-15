@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,10 @@ import { DOCUMENT } from '@angular/common';
 export class NavbarComponent implements OnInit {
   private readonly isDark: string | null = localStorage.getItem('isDark');
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     if (this.isDark && this.isDark !== 'undefined' && JSON.parse(this.isDark)) {
@@ -29,5 +33,11 @@ export class NavbarComponent implements OnInit {
       //set dark theme in case it's somehow undefined in localStorage
       localStorage.setItem('isDark', 'true');
     }
+  }
+
+  logout() {
+    localStorage.removeItem('credentials');
+
+    this.router.navigate(['/auth/login']);
   }
 }
